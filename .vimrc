@@ -313,7 +313,9 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""command
+"""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""python command""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""
 "K           Show python docs (g:pymode_doc enabled)
 "<C-Space>   Rope autocomplete (g:pymode_rope enabled)
 "<C-c>g      Rope goto definition (g:pymode_rope enabled)
