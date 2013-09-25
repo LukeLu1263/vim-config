@@ -33,6 +33,9 @@ Bundle 'gmarik/vundle'
 " Vim-Multipile-Cursors
 " Bundle 'vim-multiple-cursors'
 
+" status/tabline for vim light as air
+Bundle 'bling/vim-airline'
+
 " Python and PHP Debugger
 "Bundle 'fisadev/vim-debug.vim'
 " Better file browser
@@ -86,6 +89,10 @@ Bundle 'matchit.zip'
 Bundle 'Wombat'
 " Yank history navigation
 Bundle 'YankRing.vim'
+
+" c/c++ cmode plugins
+Bundle 'c.vim'
+
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -163,6 +170,12 @@ map <F2> :TaskList<CR>
 " save as sudo
 ca w!! w !sudo tee "%"
 
+" airline settings
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline_powerline_fonts = 1
+
 " colors and settings of autocompletion
 highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
@@ -193,15 +206,17 @@ let OmniCpp_ShowAccess = 1
 " namespaces that are always used in your project.
 let OmniCpp_DefaultNamespaces = ["std"]
 
-" debugger keyboard shortcuts
-map <F5> :Dbg over<CR>
-map <F6> :Dbg into<CR>
-map <F7> :Dbg out<CR>
-map <F8> :Dbg here<CR>
-map <F9> :Dbg break<CR>
-map <F10> :Dbg watch<CR>
-map <F11> :Dbg down<CR>
-map <F12> :Dbg up<CR>
+" debugger keyboard shortcuts for python
+"map <F5> :Dbg over<CR>
+"map <F6> :Dbg into<CR>
+"map <F7> :Dbg out<CR>
+"map <F8> :Dbg here<CR>
+"map <F9> :Dbg break<CR>
+"map <F10> :Dbg watch<CR>
+"map <F11> :Dbg down<CR>
+"map <F12> :Dbg up<CR>
+
+
 
 " CtrlP (new fuzzy finder)
 " ,e = open file (like the original :e) but with recursive and fuzzy file name
@@ -261,6 +276,11 @@ nmap ,wr :RecurGrepFast <cword><CR>
 " :call pymode#troubleshooting#Test()
 " :help PythonModeOptions
 
+
+""""""PYMODE SWITHING"""""""""
+" 0 is turn off
+" let g:pymode = 0
+
 " Check code every save
 let g:pymode_lint_write = 0
 " Key for show python documentation
@@ -308,9 +328,6 @@ set wildmode=list:longest
 
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
-
-
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -394,3 +411,13 @@ imap <c-e> <End>
 imap <c-a> <Home>
 imap <c-d> <Del>
 imap <c-k> <ESC>ld$a
+
+
+
+"============================================================
+"========================c/c++ settings======================
+"============================================================
+" keboard shortcuts for c/c++
+let g:C_Ctrl_j   = 'off'
+
+
