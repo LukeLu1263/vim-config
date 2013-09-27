@@ -32,12 +32,8 @@ Bundle 'gmarik/vundle'
 
 " Vim-Multipile-Cursors
 " Bundle 'vim-multiple-cursors'
-
-" status/tabline for vim light as air
-Bundle 'bling/vim-airline'
-
 " Python and PHP Debugger
-"Bundle 'fisadev/vim-debug.vim'
+" Bundle 'fisadev/vim-debug.vim'
 " Better file browser
 Bundle 'scrooloose/nerdtree'
 " Code commenter
@@ -74,6 +70,12 @@ Bundle 'honza/vim-snippets'
 Bundle 'garbas/vim-snipmate'
 " Git diff icons on the side of the file lines
 Bundle 'airblade/vim-gitgutter'
+" Status/tabline for vim light as air
+Bundle 'bling/vim-airline'
+" Automated tag generation and syntax highlight
+Bundle 'xolox/vim-easytags'
+" Requered for easytags
+Bundle 'xolox/vim-misc'
 
 " Bundles from vim-scripts repos
 
@@ -89,9 +91,10 @@ Bundle 'matchit.zip'
 Bundle 'Wombat'
 " Yank history navigation
 Bundle 'YankRing.vim'
-
-" c/c++ cmode plugins
+" C/C++ cmode plugins
 Bundle 'c.vim'
+" easytags query and search result in one buffer for faster jump to desired tag.
+Bundle 'yate'
 
 
 " Installing plugins the first time
@@ -160,9 +163,6 @@ imap <M-Down> <ESC><c-w>j
 " automatically close autocompletion window
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-" old autocomplete keyboard shortcut
-imap <C-J> <C-X><C-O>
 
 " show pending tasks list
 map <F2> :TaskList<CR>
@@ -280,6 +280,7 @@ nmap ,wr :RecurGrepFast <cword><CR>
 """"""PYMODE SWITHING"""""""""
 " 0 is turn off
 " let g:pymode = 0
+" autocmd FileType c,cpp,h let g:pymode = 0
 
 " Check code every save
 let g:pymode_lint_write = 0
@@ -318,6 +319,9 @@ endif
 if has('gui_running')
     colorscheme wombat
 endif
+
+" change the default theme
+let g:airline_theme= 'ubaryd'
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
@@ -419,5 +423,33 @@ imap <c-k> <ESC>ld$a
 "============================================================
 " keboard shortcuts for c/c++
 let g:C_Ctrl_j   = 'off'
+" map jump to definition
+nmap <C-J> <C-]>
+" map jump to actual definition
+nmap g<C-J> g<C-]>
 
+" let g:easytags_file = '~/.vim/tags'
+autocmd FileType h,c,cpp set tags=./.tags;
+" create project specific tags based on the tags options path above
+autocmd FileType h,c,cpp let g:easytags_dynamic_files = 2
+" Update recursively
+autocmd FileType h,c,cpp let g:easytags_autorecurse = 1
+" generate tags for struct/class members in C++ and Java
+" Note: before the easytags.vim plug-in is loaded (???)
+let g:easytags_include_members = 1
 
+" disable update time period, and set to 1
+"let g:easytags_always_enabled = 1
+" maybe it will interrupt your work, change to 0
+"let g:easytags_on_cursorhold = 0
+" disable auto-UpdateTags set to 0
+"let g:easytags_auto_update = 0
+" disable auto highlight set to 0 
+" Note:HighlightTags will slow down the large project
+let g:easytags_auto_highlight = 0
+
+":HighlightTags
+":UpdateTags -R *.cpp *.c *.h
+
+" show the specific tags
+" :YATE
