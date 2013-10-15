@@ -30,10 +30,6 @@ Bundle 'gmarik/vundle'
 
 " Bundles from GitHub repos:
 
-" Vim-Multipile-Cursors
-" Bundle 'vim-multiple-cursors'
-" Python and PHP Debugger
-" Bundle 'fisadev/vim-debug.vim'
 " Better file browser
 Bundle 'scrooloose/nerdtree'
 " Code commenter
@@ -72,10 +68,6 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'airblade/vim-gitgutter'
 " Status/tabline for vim light as air
 Bundle 'bling/vim-airline'
-" Automated tag generation and syntax highlight
-Bundle 'xolox/vim-easytags'
-" Requered for easytags
-Bundle 'xolox/vim-misc'
 
 " Bundles from vim-scripts repos
 
@@ -93,9 +85,8 @@ Bundle 'Wombat'
 Bundle 'YankRing.vim'
 " C/C++ cmode plugins
 Bundle 'c.vim'
-" easytags query and search result in one buffer for faster jump to desired tag.
-Bundle 'yate'
-
+" Cscope plugin for skip operation
+Bundle 'cscope.vim'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -369,7 +360,7 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 set cursorline
 
 " incording to what your typing case to decide chose ignore case or not
-set smartcase
+set ignorecase
 
 " 命令
 " In normal mode:
@@ -421,35 +412,24 @@ imap <c-k> <ESC>ld$a
 "============================================================
 "========================c/c++ settings======================
 "============================================================
-" keboard shortcuts for c/c++
-let g:C_Ctrl_j   = 'off'
-" map jump to definition
-nmap <C-J> <C-]>
-" map jump to actual definition
-nmap g<C-J> g<C-]>
 
-" let g:easytags_file = '~/.vim/tags'
-autocmd FileType h,c,cpp set tags=./.tags;
-" create project specific tags based on the tags options path above
-autocmd FileType h,c,cpp let g:easytags_dynamic_files = 2
-" Update recursively
-autocmd FileType h,c,cpp let g:easytags_autorecurse = 1
-" generate tags for struct/class members in C++ and Java
-" Note: before the easytags.vim plug-in is loaded (???)
-let g:easytags_include_members = 1
-
-" disable update time period, and set to 1
-"let g:easytags_always_enabled = 1
-" maybe it will interrupt your work, change to 0
-"let g:easytags_on_cursorhold = 0
-" disable auto-UpdateTags set to 0
-"let g:easytags_auto_update = 0
-" disable auto highlight set to 0 
-" Note:HighlightTags will slow down the large project
-let g:easytags_auto_highlight = 0
-
-":HighlightTags
-":UpdateTags -R *.cpp *.c *.h
-
-" show the specific tags
-" :YATE
+" CSCOPE
+" in case your cscope execute is not in system path.
+" let g:cscope_cmd = 'D:/tools/vim/cscope.exe'
+" s: Find this C symbol
+map <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+map <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+map <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+map <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+map <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+map <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+map <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+map <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+map <leader>l  :call ToggleLocationList()<CR>
