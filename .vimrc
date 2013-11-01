@@ -69,6 +69,7 @@ Bundle 'airblade/vim-gitgutter'
 " Status/tabline for vim light as air
 Bundle 'bling/vim-airline'
 
+
 " Bundles from vim-scripts repos
 
 " Autocompletion
@@ -270,8 +271,8 @@ nmap ,wr :RecurGrepFast <cword><CR>
 
 """"""PYMODE SWITHING"""""""""
 " 0 is turn off
-" let g:pymode = 0
-" autocmd FileType c,cpp,h let g:pymode = 0
+"let g:pymode = 0
+autocmd FileType c,cpp,h let g:pymode = 0
 
 " Check code every save
 let g:pymode_lint_write = 0
@@ -418,13 +419,13 @@ imap <c-k> <ESC>ld$a
 map <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
 " g: Find this definition
 map <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-map <C-G> :call CscopeFind('g', expand('<cword>'))<CR>
+map ,d :call CscopeFind('g', expand('<cword>'))<CR>
 
 " d: Find functions called by this function
 map <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
 " c: Find functions calling this function
 map <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-map <C-H> :call CscopeFind('c', expand('<cword>'))<CR>
+map ,D :call CscopeFind('c', expand('<cword>'))<CR>
 
 " t: Find this text string
 map <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
