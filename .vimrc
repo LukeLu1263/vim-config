@@ -407,8 +407,6 @@ imap <c-a> <Home>
 imap <c-d> <Del>
 imap <c-k> <ESC>ld$a
 
-
-
 "============================================================
 "========================c/c++ settings======================
 "============================================================
@@ -420,10 +418,14 @@ imap <c-k> <ESC>ld$a
 map <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
 " g: Find this definition
 map <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+map <C-G> :call CscopeFind('g', expand('<cword>'))<CR>
+
 " d: Find functions called by this function
 map <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
 " c: Find functions calling this function
 map <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+map <C-H> :call CscopeFind('c', expand('<cword>'))<CR>
+
 " t: Find this text string
 map <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
 " e: Find this egrep pattern
@@ -433,3 +435,11 @@ map <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 map <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 map <leader>l  :call ToggleLocationList()<CR>
+
+" Refresh cscope database
+" If there is no path_to_the_folder provided, all existing cscope databases
+" will be re-created.
+":CscopeGen [path_to_the_folder]
+
+":CscopeClear    to remove all existing cscope databases
+":CscopeList     to list all existing cscope databases
