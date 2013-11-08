@@ -56,9 +56,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'Townk/vim-autoclose'
 " Indent text object
 Bundle 'michaeljsmith/vim-indent-object'
-" Python mode (indentation, doc, refactor, lints, code checking, motion and
-" operators, highlighting, run and ipdb breakpoints)
-Bundle 'klen/python-mode'
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
@@ -68,6 +65,8 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'airblade/vim-gitgutter'
 " Status/tabline for vim light as air
 Bundle 'bling/vim-airline'
+" awesome Python autocompletion with VIM
+Bundle 'davidhalter/jedi-vim'
 
 
 " Bundles from vim-scripts repos
@@ -88,6 +87,7 @@ Bundle 'YankRing.vim'
 Bundle 'c.vim'
 " Cscope plugin for skip operation
 Bundle 'cscope.vim'
+
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -152,6 +152,7 @@ imap <M-Left> <ESC><c-w>h
 imap <M-Up> <ESC><c-w>k
 imap <M-Down> <ESC><c-w>j
 
+
 " automatically close autocompletion window
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -198,17 +199,6 @@ let OmniCpp_ShowAccess = 1
 " namespaces that are always used in your project.
 let OmniCpp_DefaultNamespaces = ["std"]
 
-" debugger keyboard shortcuts for python
-"map <F5> :Dbg over<CR>
-"map <F6> :Dbg into<CR>
-"map <F7> :Dbg out<CR>
-"map <F8> :Dbg here<CR>
-"map <F9> :Dbg break<CR>
-"map <F10> :Dbg watch<CR>
-"map <F11> :Dbg down<CR>
-"map <F12> :Dbg up<CR>
-
-
 
 " CtrlP (new fuzzy finder)
 " ,e = open file (like the original :e) but with recursive and fuzzy file name
@@ -224,7 +214,7 @@ let OmniCpp_DefaultNamespaces = ["std"]
 
 let g:ctrlp_map = ',e'
 nmap ,g :CtrlPBufTag<CR>
-map ,G :CtrlPBufTagAll<CR>
+nmap ,G :CtrlPBufTagAll<CR>
 nmap ,f :CtrlPLine<CR>
 nmap ,m :CtrlPMRUFiles<CR>
 nmap ,c :CtrlPCmdPalette<CR>
@@ -249,6 +239,18 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.pyc$\|\.pyo$',
   \ }
 
+" Jedi-vim python autocompletion
+"Usages <leader>n (shows all the usages of a name)
+"Open module, e.g. :Pyimport os (opens the os module)
+let g:jedi#goto_assignments_command = ",d"
+let g:jedi#goto_definitions_command = ",j"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = ",u"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#show_call_signatures = "1"
+
+
 " Ignore files on NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
@@ -262,36 +264,6 @@ nmap ,r :RecurGrepFast
 " ,wr and ,wR do the same, but searching the word under the cursor.
 nmap ,wR :RecurGrep <cword><CR>
 nmap ,wr :RecurGrepFast <cword><CR>
-
-" python-mode settings
-" help command
-" :call pymode#troubleshooting#Test()
-" :help PythonModeOptions
-
-
-""""""PYMODE SWITHING"""""""""
-" 0 is turn off
-"let g:pymode = 0
-"autocmd FileType c,cpp,h let g:pymode = 0
-
-" Check code every save
-let g:pymode_lint_write = 0
-" Key for show python documentation
-let g:pymode_doc_key = 'K'
-" Additional python paths
-let g:pymode_paths = []
-
-" run pep8+pyflakes+pylint validator with \8
-autocmd FileType python map <buffer> <leader>8 :PyLint<CR>
-
-" rope (from python-mode) settings
-nmap ,d :RopeGotoDefinition<CR>
-nmap ,D :tab split<CR>:RopeGotoDefinition<CR>
-nmap ,o :RopeFindOccurrences<CR>
-nmap J	:RopeShowDoc<CR>
-
-" don't let pyflakes allways override the quickfix list
-" let g:pyflakes_use_quickfix = 0
 
 " tabman shortcuts
 let g:tabman_toggle = 'tl'
@@ -326,37 +298,10 @@ set wildmode=list:longest
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""python command""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""
-"K           Show python docs (g:pymode_doc enabled)
-"<C-Space>   Rope autocomplete (g:pymode_rope enabled)
-"<C-c>g      Rope goto definition (g:pymode_rope enabled)
-"<C-c>d      Rope show documentation (g:pymode _rope enabled) RopeShowDoc == 'J'
-"<C-c>f      Run python (g:pymode_run enabled)
-"<Leader>b   Set, unset breakpoint (g:pymode    _breakpoint enabled)
-"[[          Jump on previous class or function (normal, vis   ual, operator modes)
-"]]          Jump on next class or function (normal, visual,    operator modes)
-"[M          Jump on previous class or method (normal, visual, o   perator modes)
-"]M          Jump on next class or method (normal, visual, operato r modes)
-"aC C        Select a class. Ex: vaC, daC, dC, yaC, yC, caC, cC (norma   l, operator modes)
-"iC          Select inner class. Ex: viC, diC, yiC, ciC (norma l, operator modes)
-"aM M        Select a function or method. Ex: vaM, daM, dM, yaM, yM, caM, cM (normal, operator modes)
-"iM          Select inner function or method. Ex: viM,     diM, yiM, ciM (normal, operator modes)
-    
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " The follwing are customed by Luke Lu
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" vim-multiple-cursors
-"let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-"let g:multi_cursor_next_key='<leader>n'
-"let g:multi_cursor_prev_key='<leader>p'
-"let g:multi_cursor_skip_key='<leader>s'
-"let g:multi_cursor_quit_key='<leader>q'
-
 " set line underlying current cursor
 set cursorline
 
