@@ -65,7 +65,7 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'airblade/vim-gitgutter'
 " Status/tabline for vim light as air
 Bundle 'bling/vim-airline'
-" awesome Python autocompletion with VIM
+" Awesome Python autocompletion with VIM
 Bundle 'davidhalter/jedi-vim'
 
 
@@ -87,6 +87,8 @@ Bundle 'YankRing.vim'
 Bundle 'c.vim'
 " Cscope plugin for skip operation
 Bundle 'cscope.vim'
+
+"Install "Markdown-vim" by doing(manually).
 
 
 " Installing plugins the first time
@@ -302,7 +304,8 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 " The follwing are customed by Luke Lu
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" set line underlying current cursor
+" set line underlying current cursor (Sometimes it will cause mosaic.
+" That means you cannot see the current line clearly.)
 set cursorline
 
 " incording to what your typing case to decide chose ignore case or not
@@ -344,7 +347,7 @@ set ignorecase
 
 " 当从其他窗口Cmd+C 粘贴到Vim中时，需要set paste。
 " 不需要粘贴时使用 set nopaste,否则会影响粘贴.
-map <leader>pp :setlocal paste!<cr>
+map <F5> :setlocal paste!<cr>
 
 imap <c-b> <Left>
 imap <c-f> <Right>
@@ -387,3 +390,5 @@ map <leader>l  :call ToggleLocationList()<CR>
 
 ":CscopeClear    to remove all existing cscope databases
 ":CscopeList     to list all existing cscope databases
+"
+" Goto to File on current cursor: gf
