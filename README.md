@@ -65,7 +65,7 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'airblade/vim-gitgutter'
 " Status/tabline for vim light as air
 Bundle 'bling/vim-airline'
-" awesome Python autocompletion with VIM
+" Awesome Python autocompletion with VIM
 Bundle 'davidhalter/jedi-vim'
 
 
@@ -87,6 +87,10 @@ Bundle 'YankRing.vim'
 Bundle 'c.vim'
 " Cscope plugin for skip operation
 Bundle 'cscope.vim'
+" Simplify Doxygen documentaion in C,C++,Python
+Bundle 'DoxygenToolkit.vim'
+
+"Install "Markdown-vim" by doing(manually).
 
 
 " Installing plugins the first time
@@ -250,6 +254,19 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "1"
 
+" DoxygenToolkit settings
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="=========================================================================="
+let g:DoxygenToolkit_blockFooter="=========================================================================="
+let g:DoxygenToolkit_authorName="MY NAME"
+let g:DoxygenToolkit_licenseTag="MY OWN LICENSE" 
+"let g:DoxygenToolkit_commentType = "Python"
+" :DoxLic (license comment)
+" :DoxAuthor (author comment)
+" :Dox    (place the cursor on the line of the function header or the class to)
+" :DoxBlock (Insert a doxygen block)
 
 " Ignore files on NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
@@ -302,7 +319,8 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 " The follwing are customed by Luke Lu
 """"""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" set line underlying current cursor
+" set line underlying current cursor (Sometimes it will cause mosaic.
+" That means you cannot see the current line clearly.)
 set cursorline
 
 " incording to what your typing case to decide chose ignore case or not
@@ -315,8 +333,6 @@ set ignorecase
 " <C-D> move down half of screen
 " <C-U> move up half of screen
 " Comment and Uncomment Code with  \cc \cc \cc and \ci \ci \ci \ci
-" <S-K> show the documentation for python builtin doc.
-" <C-c-d> show the doc for your customed
 " <C-I> <C-O>在上一个鼠标位置与下一个鼠标位置之间跳转，也可以用于文件跳转.
 " zi    toggle folding
 
@@ -344,7 +360,7 @@ set ignorecase
 
 " 当从其他窗口Cmd+C 粘贴到Vim中时，需要set paste。
 " 不需要粘贴时使用 set nopaste,否则会影响粘贴.
-map <leader>pp :setlocal paste!<cr>
+map <F5> :setlocal paste!<cr>
 
 imap <c-b> <Left>
 imap <c-f> <Right>
@@ -387,3 +403,5 @@ map <leader>l  :call ToggleLocationList()<CR>
 
 ":CscopeClear    to remove all existing cscope databases
 ":CscopeList     to list all existing cscope databases
+"
+" Goto to File on current cursor: gf

@@ -87,6 +87,8 @@ Bundle 'YankRing.vim'
 Bundle 'c.vim'
 " Cscope plugin for skip operation
 Bundle 'cscope.vim'
+" Simplify Doxygen documentaion in C,C++,Python
+Bundle 'DoxygenToolkit.vim'
 
 "Install "Markdown-vim" by doing(manually).
 
@@ -252,6 +254,19 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "1"
 
+" DoxygenToolkit settings
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="=========================================================================="
+let g:DoxygenToolkit_blockFooter="=========================================================================="
+let g:DoxygenToolkit_authorName="MY NAME"
+let g:DoxygenToolkit_licenseTag="MY OWN LICENSE" 
+"let g:DoxygenToolkit_commentType = "Python"
+" :DoxLic (license comment)
+" :DoxAuthor (author comment)
+" :Dox    (place the cursor on the line of the function header or the class to)
+" :DoxBlock (Insert a doxygen block)
 
 " Ignore files on NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
@@ -318,8 +333,6 @@ set ignorecase
 " <C-D> move down half of screen
 " <C-U> move up half of screen
 " Comment and Uncomment Code with  \cc \cc \cc and \ci \ci \ci \ci
-" <S-K> show the documentation for python builtin doc.
-" <C-c-d> show the doc for your customed
 " <C-I> <C-O>在上一个鼠标位置与下一个鼠标位置之间跳转，也可以用于文件跳转.
 " zi    toggle folding
 
