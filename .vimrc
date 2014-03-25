@@ -67,6 +67,8 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'bling/vim-airline'
 " Awesome Python autocompletion with VIM
 Bundle 'davidhalter/jedi-vim'
+" Python folding"
+"Bundle 'tmhedberg/SimpylFold' (likely slow down speed)
 
 
 " Bundles from vim-scripts repos
@@ -314,11 +316,11 @@ set wildmode=list:longest
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
+" Previewing of your folded classes' and functions' docstrings in the fold text,
+"let g:SimpylFold_docstring_preview = 1
+" You don't want to see your docstrings folded
+"let g:SimpylFold_fold_docstring = 0
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" The follwing are customed by Luke Lu
-""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""
 " set line underlying current cursor (Sometimes it will cause mosaic.
 " That means you cannot see the current line clearly.)
 set cursorline
